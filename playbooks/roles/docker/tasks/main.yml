@@ -1,0 +1,11 @@
+---
+# installs docker pakcage
+#
+- name: add docker repo
+  apt_repository: repo="deb https://get.docker.com/ubuntu docker main" state=present
+
+- name: get docker repo key
+  apt_key: keyserver=hkp://keyserver.ubuntu.com:80 id=36A1D7869245C8950F966E92D8576A8BA88D21E9
+
+- name: install docker
+  apt: pkg=lxc-docker state=latest update_cache=yes

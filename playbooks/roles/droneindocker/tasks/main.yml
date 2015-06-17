@@ -1,0 +1,24 @@
+---
+# start drone.io container
+#
+- name: install pip
+  apt: 
+    name: "{{ item }}"
+    state: latest
+  with_items:
+    - python-pip
+
+- name: install docker-py
+  pip: name=docker-py version=1.1.0
+
+- name: run drone.io container
+  docker:
+    name: drone
+    image: drone/drone 
+    ports: 81:80
+    state: running
+    volumes: /var/run/docker.sock:/var/run/docker.sock
+    env:
+      DRONE_GITHUB_CLIENT: ""
+      DRONE_GITHUB_SECRET: ""
+

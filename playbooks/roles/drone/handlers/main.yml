@@ -1,0 +1,5 @@
+---
+# handler from drone.io server
+#
+- name: restart drone
+  shell: service drone restart

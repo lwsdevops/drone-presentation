@@ -1,0 +1,10 @@
+---
+# configure drone-presentation box
+#
+- hosts: "{{ hosts }}"
+  sudo: yes
+
+  roles:
+    - docker
+    - drone
+      #    - droneindocker

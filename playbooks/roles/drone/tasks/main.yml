@@ -1,0 +1,22 @@
+---
+# install and configure drone.io
+#
+- name: install libsqlite3-dev
+  apt: name=libsqlite3-dev state=latest update_cache=yes
+
+- name: get drone.io package
+  get_url: url=http://downloads.drone.io/master/drone.deb dest=/tmp
+
+- name: install drone.io
+  apt: deb=/tmp/drone.deb
+
+- name: copy drone.toml
+  copy:
+    src: roles/drone/files/drone.toml
+    dest: /etc/drone/drone.toml
+    owner: root
+    group: root
+    mode: 644
+    backup: yes
+  notify:
+    - restart drone
